@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Streaks — Habit Tracker</title>
+  <meta name="theme-color" content="#6366f1">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Streaks">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <div>
+        <p class="date" id="date"></p>
+        <h1 id="greeting">Hello</h1>
+      </div>
+      <div class="top-right">
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode">🌓</button>
+        <button class="icon-btn" id="menuBtn" aria-label="Backup and settings">⋯</button>
+      </div>
+    </header>
+
+    <section class="summary" aria-live="polite">
+      <div class="ring" id="ring"><span id="ringText">0/0</span></div>
+      <div>
+        <p class="summary-title" id="summaryTitle">Let's build a habit</p>
+        <p class="summary-sub" id="summarySub"></p>
+      </div>
+    </section>
+
+    <section id="list" class="list" aria-label="Today's habits"></section>
+    <div id="empty" class="empty" hidden>
+      <div class="empty-emoji">🌱</div>
+      <p>No habits yet.<br>Add one small thing you'll do every day.</p>
+    </div>
+  </main>
+
+  <button class="fab" id="addBtn" aria-label="Add habit">+</button>
+
+  <!-- Add / edit sheet -->
+  <dialog id="formSheet" class="sheet">
+    <form method="dialog" id="habitForm">
+      <h2 id="formTitle">New habit</h2>
+      <label>Name
+        <input id="fName" required maxlength="40" placeholder="e.g. Read 10 pages" autocomplete="off">
+      </label>
+      <label>Icon
+        <div class="emoji-row" id="emojiRow"></div>
+      </label>
+      <label>Color
+        <div class="color-row" id="colorRow"></div>
+      </label>
+      <label>Repeat
+        <div class="day-row" id="dayRow"></div>
+      </label>
+      <label>Reminder (optional)
+        <input type="time" id="fReminder">
+      </label>
+      <div class="actions">
+        <button type="button" class="btn ghost" id="cancelForm">Cancel</button>
+        <button type="submit" class="btn primary" id="saveForm">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Detail sheet -->
+  <dialog id="detailSheet" class="sheet">
+    <div id="detailBody"></div>
+  </dialog>
+
+  <!-- Backup sheet -->
+  <dialog id="menuSheet" class="sheet">
+    <h2>Backup</h2>
+    <p class="muted">Your data stays on this device. Export a copy to keep it safe.</p>
+    <div class="actions col">
+      <button class="btn primary" id="exportBtn">Export JSON</button>
+      <button class="btn" id="importBtn">Import JSON</button>
+      <button class="btn ghost" id="closeMenu">Close</button>
+    </div>
+    <input type="file" id="importFile" accept="application/json" hidden>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <script src="streak.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
